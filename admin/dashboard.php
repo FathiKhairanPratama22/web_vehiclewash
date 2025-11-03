@@ -89,7 +89,20 @@ $result = mysqli_query($conn, $query);
 
 <div class="sidebar">
     <h4 class="mb-4"><i class="bi bi-droplet-fill"></i> ProClean</h4>
-    
+    <ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link" href="dashboard.php"><i class="bi bi-grid-1x2-fill me-2"></i> Dashboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="manajemen_layanan.php"><i class="bi bi-gear-fill me-2"></i> Manajemen Layanan</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="laporan.php"><i class="bi bi-file-earmark-bar-graph-fill me-2"></i> Laporan</a>
+    </li>
+    <li class="nav-item mt-auto">
+         <a class="nav-link" href="logout.php"><i class="bi bi-box-arrow-left me-2"></i> Logout</a>
+    </li>
+</ul>
 </div>
 
 <div class="main-content">
