@@ -85,6 +85,17 @@ class PDF extends FPDF
 $pdf = new PDF();
 $pdf->AliasNbPages(); 
 $pdf->AddPage();
+// Tambah Judul Laporan
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(0, 10, 'Laporan Pendapatan ProClean Wash', 0, 1, 'C');
+
+// Tambah Periode Tanggal
+$pdf->SetFont('Arial','',10);
+$tanggal_awal_f = date('d M Y', strtotime($tanggal_awal));
+$tanggal_akhir_f = date('d M Y', strtotime($tanggal_akhir));
+$pdf->Cell(0, 7, "Periode: $tanggal_awal_f s/d $tanggal_akhir_f", 0, 1, 'C');
+
+$pdf->Ln(10); // Memberi jarak
 $pdf->rowNum = 1; 
 
 $header = array('No', 'Nama Pelanggan', 'Tanggal', 'Kendaraan', 'Layanan', 'Harga');
