@@ -192,6 +192,9 @@ $(document).ready(function() {
     });
 });
 </script>
+<footer class="text-center text-muted mt-5 mb-3">
+    <small>&copy; 2025 ProClean Vehicle Wash</small>
+</footer>
 
 </body>
 </html>
