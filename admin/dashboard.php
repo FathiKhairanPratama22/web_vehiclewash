@@ -11,15 +11,18 @@ if (!isset($_SESSION['admin'])) {
 
 if (isset($_GET['konfirmasi'])) {
     $id = $_GET['konfirmasi'];
-    mysqli_query($conn, "UPDATE booking SET status='Selesai' WHERE id_booking='$id'");
-    header("Location: dashboard.php");
+    $stmt = $conn->prepare("UPDATE booking SET status='Selesai' WHERE id_booking = ?");
+    $stmt->bind_param("i", $id); // 'i' untuk integer
+    $stmt->execute();
     exit;
 }
 
 
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
-    mysqli_query($conn, "DELETE FROM booking WHERE id_booking='$id'");
+    $stmt = $conn->prepare("DELETE FROM booking WHERE id_booking = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
     header("Location: dashboard.php");
     exit;
 }
