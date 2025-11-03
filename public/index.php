@@ -25,7 +25,7 @@ $result_layanan = mysqli_query($conn, "SELECT * FROM layanan ORDER BY id_layanan
             </div>
             <div class="col-lg-7 form-side">
                 <h3>Isi Detail Booking Anda</h3>
-                <form action="proses_booking.php" method="POST">
+                <form action="proses_booking.php" method="POST" id="bookingForm">
                     <div class="row"><div class="col-md-6 mb-3"><label for="nama" class="form-label">Nama</label><input type="text" name="nama" class="form-control" required></div><div class="col-md-6 mb-3"><label for="no_hp" class="form-label">No HP</label><input type="text" name="no_hp" class="form-control" required></div></div>
                     <div class="mb-3"><label for="jenis_kendaraan" class="form-label">Jenis Kendaraan</label><select name="jenis_kendaraan" id="jenis_kendaraan" class="form-select" required><option value="Mobil">Mobil</option><option value="Motor">Motor</option></select></div>
                     
@@ -62,7 +62,14 @@ $result_layanan = mysqli_query($conn, "SELECT * FROM layanan ORDER BY id_layanan
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 $(document).ready(function() {
-    
+    $('#bookingForm').on('submit', function(e) {
+    var no_hp = $('input[name="no_hp"]').val();
+    if (!/^[0-9]+$/.test(no_hp) || no_hp.length < 10 || no_hp.length > 13) {
+        alert('Nomor HP tidak valid. Harap isi hanya dengan angka (10-13 digit).');
+        e.preventDefault(); // Mencegah form dikirim
+        return false;
+    }
+});
     $('#tanggal_booking').on('change', function() {
         var tanggal = $(this).val();
         if (tanggal) { $.get('get_jam.php', {tanggal: tanggal}, function(data) { $('#jam_booking').html(data); }); }
