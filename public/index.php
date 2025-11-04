@@ -25,6 +25,9 @@ $result_layanan = mysqli_query($conn, "SELECT * FROM layanan ORDER BY id_layanan
             </div>
             <div class="col-lg-7 form-side">
                 <h3>Isi Detail Booking Anda</h3>
+                <?php if (isset($_GET['status']) && $_GET['status'] == 'gagal_tanggal'): ?>
+    <div class="alert alert-danger">Anda tidak bisa melakukan booking untuk tanggal yang sudah lewat.</div>
+<?php endif; ?>
                 <form action="proses_booking.php" method="POST" id="bookingForm">
                     <div class="row"><div class="col-md-6 mb-3"><label for="nama" class="form-label">Nama</label><input type="text" name="nama" class="form-control" required></div><div class="col-md-6 mb-3"><label for="no_hp" class="form-label">No HP</label><input type="text" name="no_hp" class="form-control" required></div></div>
                     <div class="mb-3"><label for="jenis_kendaraan" class="form-label">Jenis Kendaraan</label><select name="jenis_kendaraan" id="jenis_kendaraan" class="form-select" required><option value="Mobil">Mobil</option><option value="Motor">Motor</option></select></div>
@@ -48,7 +51,7 @@ $result_layanan = mysqli_query($conn, "SELECT * FROM layanan ORDER BY id_layanan
                         </div>
                     </div>
 
-                    <div class="row"><div class="col-md-6 mb-3"><label for="tanggal_booking" class="form-label">Tanggal Booking</label><input type="date" id="tanggal_booking" name="tanggal_booking" class="form-control" required></div><div class="col-md-6 mb-3"><label for="jam_booking" class="form-label">Jam Booking</label><select id="jam_booking" name="jam_booking" class="form-select" required><option value="">Pilih tanggal dulu...</option></select></div></div>
+                    <div class="row"><div class="col-md-6 mb-3"><label for="tanggal_booking" class="form-label">Tanggal Booking</label><input type="date" id="tanggal_booking" name="tanggal_booking" class="form-control" min="<?php echo date('Y-m-d'); ?>" required></div><div class="col-md-6 mb-3"><label for="jam_booking" class="form-label">Jam Booking</label><select id="jam_booking" name="jam_booking" class="form-select" required><option value="">Pilih tanggal dulu...</option></select></div></div>
                     <button type="submit" class="btn btn-primary w-100 mt-3">Booking Sekarang</button>
                 </form>
             </div>

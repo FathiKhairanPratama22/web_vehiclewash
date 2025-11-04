@@ -7,7 +7,14 @@ $jenis = $_POST['jenis_kendaraan'];
 $id_layanan = $_POST['layanan']; 
 $tanggal = $_POST['tanggal_booking'];
 $jam = $_POST['jam_booking'];
-
+// VALIDASI TANGGAL
+$tanggal_hari_ini = date('Y-m-d');
+if ($tanggal < $tanggal_hari_ini) {
+    // Jika user mencoba booking tanggal kemarin
+    header("Location: index.php?status=gagal_tanggal");
+    exit();
+}
+// BATAS VALIDASI
 $q_layanan = mysqli_query($conn, "SELECT nama_layanan FROM layanan WHERE id_layanan = '$id_layanan'");
 if(mysqli_num_rows($q_layanan) > 0) {
     $data_layanan = mysqli_fetch_assoc($q_layanan);
