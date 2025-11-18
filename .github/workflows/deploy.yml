@@ -1,0 +1,46 @@
+name: CI/CD Auto Deploy Vehicle Wash
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-local:
+    runs-on: [my-laptop]
+
+    steps:
+      # Langkah 1: Cari lokasi folder proyek di laptop Anda
+      - name: Set project path
+        run: |
+          PROJECT_PATH=~/web_vehiclewash
+          echo "PROJECT_PATH=$PROJECT_PATH" >> $GITHUB_ENV
+          echo "✅ Lokasi proyek ditemukan di: $PROJECT_PATH"
+
+      # Langkah 2: Ambil kode terbaru dari GitHub
+      - name: Pull latest changes
+        working-directory: ${{ env.PROJECT_PATH }}
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+
+      # Langkah 3: Matikan container lama
+      - name: Stop existing containers
+        working-directory: ${{ env.PROJECT_PATH }}
+        run: |
+          docker compose down || true
+
+      # Langkah 4: Build ulang dan jalankan container
+      - name: Build and start containers
+        working-directory: ${{ env.PROJECT_PATH }}
+        run: |
+          docker compose up -d --build
+
+      # Langkah 5: Tunggu sebentar agar server siap
+      - name: Wait for services
+        run: sleep 10
+
+      # Langkah 6: Cek apakah website hidup (Health Check)
+      - name: Health check
+        run: |
+          curl -f http://localhost || exit 1
+          echo "✅ Aplikasi berhasil berjalan!"
