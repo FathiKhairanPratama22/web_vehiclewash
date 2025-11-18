@@ -1,0 +1,22 @@
+body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
+    .main-container { display: flex; min-height: 100vh; align-items: center; justify-content: center; }
+    .booking-wrapper { width: 100%; max-width: 1100px; background: #fff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden; }
+    .info-side { background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 50px; display: flex; flex-direction: column; justify-content: center; }
+    .form-side { padding: 50px; }
+    .form-control, .form-select { height: 50px; border-radius: 10px; }
+    .service-option { border: 1px solid #dee2e6; border-radius: 10px; padding: 15px; cursor: pointer; transition: all 0.2s ease-in-out; }
+    .service-option input[type="radio"] { display: none; }
+    .service-option.selected { border-color: #007bff; background-color: #f0f7ff; }
+
+     body { font-family: 'Poppins', sans-serif; background-color: #f4f7fc; }
+    .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 250px; padding: 20px; background-color: #1e293b; color: #e2e8f0; }
+    .sidebar h4 { color: #fff; font-weight: 600; }
+    .sidebar .nav-link { color: #94a3b8; font-size: 0.95rem; padding: 10px 15px; border-radius: 8px; }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover { background-color: #334155; color: #fff; }
+    .main-content { margin-left: 250px; padding: 30px; }
+    .kpi-card { border: none; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .kpi-card .card-body { display: flex; align-items: center; }
+    .kpi-card .icon { font-size: 2rem; padding: 20px; border-radius: 50%; margin-right: 20px; color: #fff; }
+    .table-wrapper { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .table td, .table th { vertical-align: middle; }
+    .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #e2e8f0; color: #475569; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 10px; }

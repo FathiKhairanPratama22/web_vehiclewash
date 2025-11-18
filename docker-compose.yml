@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80" # Akses aplikasi Anda via http://localhost
+    volumes:
+      # Hubungkan kode Anda ke root Nginx
+      - .:/var/www/vehiclewash
+    depends_on:
+      - php
+    networks:
+      - app-network
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /var/www/vehiclewash
+    volumes:
+      # Hubungkan kode Anda ke root PHP
+      - .:/var/www/vehiclewash
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_NAME: myapp
+      DB_USER: root
+      DB_PASSWORD: password
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: myapp
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80" # Akses PHPMyAdmin via http://localhost:8081
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: password
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge

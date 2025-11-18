@@ -1,0 +1,16 @@
+name: Hello World Workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  greeting:
+    runs-on: [my-laptop]
+
+    steps:
+    - name: Say Hello
+      run: echo "Hello, World! 👋 Ini deployment pertama saya dari GitHub Actions!"
+
+    - name: Show Date and Time
+      run: echo "Current time is $(date) ⏱️"
